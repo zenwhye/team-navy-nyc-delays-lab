@@ -411,7 +411,7 @@ overturned an impression an earlier step had left you with**
 * **Zen: AI Laison**
 During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.
 * **Jun Lum: Constructive Critic + Reporter**
-
+The airport mix bar chart revealed to me that United airline late departures was due to a bad airport as seen in the on time departure by time and day and airport, Newark has the lowest on time departure and united airlines has 79% of departure from Newark. This make me realise how important visual graphs is at in helping to deduce hidden information.
 * **Ben: Coder**
 
 * **Phoebe: Navigator + Verifier**
