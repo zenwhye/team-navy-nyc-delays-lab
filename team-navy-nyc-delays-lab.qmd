@@ -12,7 +12,9 @@ library(ggrepel)
 ## Inline data preparation (reads carriers.csv and prepares `departures`)
 
 # ensure data directory
-if (!dir.exists("data")) dir.create("data")
+if (!dir.exists("data")) {
+  dir.create("data")
+}
 
 # read carriers lookup
 carriers <- readr::read_csv("carriers.csv", show_col_types = FALSE)
@@ -23,7 +25,12 @@ departures <- flights %>%
   transmute(
     airline_code = carrier,
     airport_code = origin,
-    airport = dplyr::recode(origin, EWR = "Newark", LGA = "LaGuardia", JFK = "JFK"),
+    airport = dplyr::recode(
+      origin,
+      EWR = "Newark",
+      LGA = "LaGuardia",
+      JFK = "JFK"
+    ),
     hour = hour,
     on_time = dep_delay < 15
   ) %>%
@@ -57,7 +64,9 @@ chunks following the lab instructions.
 ```{r}
 #| label: prep-checks
 # Verifier: ensure columns exist and no missing values
-stopifnot(all(c("airline","airport","hour","on_time") %in% names(departures)))
+stopifnot(all(
+  c("airline", "airport", "hour", "on_time") %in% names(departures)
+))
 stopifnot(!any(is.na(departures)))
 ```
 
@@ -78,10 +87,17 @@ library(ggplot2)
 library(forcats)
 
 ggplot(departures_by_airline, aes(x = n, y = fct_reorder(airline, n))) +
-  geom_segment(aes(x = 0, xend = n, y = airline, yend = airline), color = "gray70") +
+  geom_segment(
+    aes(x = 0, xend = n, y = airline, yend = airline),
+    color = "gray70"
+  ) +
   geom_point(size = 3, color = "steelblue") +
   geom_text(aes(label = n), hjust = -0.1, size = 3) +
-  labs(x = "Number of departures (n)", y = "Airline", title = "Airlines Ranked by Number of Departures") +
+  labs(
+    x = "Number of departures (n)",
+    y = "Airline",
+    title = "Airlines Ranked by Number of Departures"
+  ) +
   theme_minimal() +
   theme(axis.title.y = element_blank()) +
   scale_x_continuous(expand = expansion(mult = c(0, 0.1)))
@@ -105,17 +121,33 @@ departures_by_airline_big <- departures_by_airline_big %>%
 
 ggplot(departures_by_airline_big, aes(x = on_time_pct, y = fct_rev(airline))) +
   geom_point(size = 3, color = "darkgreen") +
-  geom_text(aes(label = sprintf("%.1f%%", on_time_pct)), hjust = -0.1, size = 3) +
-  labs(x = "On-time departure percentage", y = "Airline", title = "Airlines Ranked by On-time Percentage (>=1000 departures)") +
+  geom_text(
+    aes(label = sprintf("%.1f%%", on_time_pct)),
+    hjust = -0.1,
+    size = 3
+  ) +
+  labs(
+    x = "On-time departure percentage",
+    y = "Airline",
+    title = "Airlines Ranked by On-time Percentage (>=1000 departures)"
+  ) +
   theme_minimal() +
   scale_x_continuous(expand = expansion(mult = c(0, 0.05)))
 ```
 
 ```{r}
 # Verifier: check busiest airline's on-time pct matches calculation from departures
-busiest_airline <- departures_by_airline %>% arrange(desc(n)) %>% slice_head(n = 1) %>% pull(airline)
-calc_pct <- departures %>% filter(airline == busiest_airline) %>% summarise(pct = mean(on_time) * 100) %>% pull(pct)
-found_pct <- departures_by_airline %>% filter(airline == busiest_airline) %>% pull(on_time_pct)
+busiest_airline <- departures_by_airline %>%
+  arrange(desc(n)) %>%
+  slice_head(n = 1) %>%
+  pull(airline)
+calc_pct <- departures %>%
+  filter(airline == busiest_airline) %>%
+  summarise(pct = mean(on_time) * 100) %>%
+  pull(pct)
+found_pct <- departures_by_airline %>%
+  filter(airline == busiest_airline) %>%
+  pull(on_time_pct)
 stopifnot(abs(calc_pct - found_pct) < 1e-8)
 ```
 
@@ -124,24 +156,44 @@ stopifnot(abs(calc_pct - found_pct) < 1e-8)
 ```{r}
 #| label: airport-mix
 mix <- departures %>%
-  filter(airline %in% (departures_by_airline %>% filter(n >= 1000) %>% pull(airline))) %>%
+  filter(
+    airline %in% (departures_by_airline %>% filter(n >= 1000) %>% pull(airline))
+  ) %>%
   group_by(airline, airport) %>%
   summarise(n = n(), .groups = "drop") %>%
   group_by(airline) %>%
   mutate(pct = n / sum(n) * 100) %>%
   ungroup()
 
-mix <- mix %>% mutate(airline = factor(airline, levels = (departures_by_airline %>% arrange(on_time_pct) %>% pull(airline))))
+mix <- mix %>%
+  mutate(
+    airline = factor(
+      airline,
+      levels = (departures_by_airline %>%
+        arrange(on_time_pct) %>%
+        pull(airline))
+    )
+  )
 
 ggplot(mix, aes(x = pct, y = fct_rev(airline), fill = airport)) +
   geom_col(position = "stack") +
-  geom_text(aes(label = ifelse(pct >= 5, sprintf("%.0f%%", pct), "")), position = position_stack(vjust = 0.5), size = 3) +
-  labs(x = "Percent of departures", y = "Airline", title = "Airport mix by airline (normalized to 100%)") +
+  geom_text(
+    aes(label = ifelse(pct >= 5, sprintf("%.0f%%", pct), "")),
+    position = position_stack(vjust = 0.5),
+    size = 3
+  ) +
+  labs(
+    x = "Percent of departures",
+    y = "Airline",
+    title = "Airport mix by airline (normalized to 100%)"
+  ) +
   theme_minimal()
 
 # Verifier: percentages per airline sum to ~100
 sum_check <- mix %>% group_by(airline) %>% summarise(total = sum(pct))
-stopifnot(all(abs(sum_check$total - 100) < 1e-6 | abs(sum_check$total - 100) < 0.1))
+stopifnot(all(
+  abs(sum_check$total - 100) < 1e-6 | abs(sum_check$total - 100) < 0.1
+))
 ```
 
 ### 3.5 On-Time Departures by Airport
@@ -152,10 +204,17 @@ by_airport <- departures %>%
   group_by(airport) %>%
   summarise(n = n(), on_time_pct = mean(on_time) * 100, .groups = "drop")
 
-ggplot(by_airport, aes(x = reorder(airport, -on_time_pct), y = on_time_pct, fill = airport)) +
+ggplot(
+  by_airport,
+  aes(x = reorder(airport, -on_time_pct), y = on_time_pct, fill = airport)
+) +
   geom_col(show.legend = FALSE) +
   geom_text(aes(label = sprintf("%.1f%%", on_time_pct)), vjust = -0.5) +
-  labs(x = "Airport", y = "On-time departure percentage", title = "On-time departures by airport") +
+  labs(
+    x = "Airport",
+    y = "On-time departure percentage",
+    title = "On-time departures by airport"
+  ) +
   theme_minimal()
 ```
 
@@ -171,7 +230,12 @@ hour_airport <- departures %>%
 ggplot(hour_airport, aes(x = hour, y = airport, fill = on_time_pct)) +
   geom_tile() +
   scale_fill_viridis_c(option = "C") +
-  labs(x = "Scheduled hour", y = "Airport", fill = "On-time %", title = "On-time % by scheduled hour and airport") +
+  labs(
+    x = "Scheduled hour",
+    y = "Airport",
+    fill = "On-time %",
+    title = "On-time % by scheduled hour and airport"
+  ) +
   theme_minimal()
 ```
 
@@ -181,7 +245,9 @@ ggplot(hour_airport, aes(x = hour, y = airport, fill = on_time_pct)) +
 #| label: schedule-mix
 # hourly schedule mix (percent) for airlines with >=1000 departures
 hourly_mix <- departures %>%
-  filter(airline %in% (departures_by_airline %>% filter(n >= 1000) %>% pull(airline))) %>%
+  filter(
+    airline %in% (departures_by_airline %>% filter(n >= 1000) %>% pull(airline))
+  ) %>%
   group_by(airline, hour) %>%
   summarise(n = n(), .groups = "drop") %>%
   group_by(airline) %>%
@@ -190,8 +256,12 @@ hourly_mix <- departures %>%
 
 ggplot(hourly_mix, aes(x = hour, y = pct)) +
   geom_line() +
-  facet_wrap(~ airline, ncol = 3) +
-  labs(x = "Scheduled hour", y = "Percent of airline's departures", title = "Schedule mix by hour for major airlines") +
+  facet_wrap(~airline, ncol = 3) +
+  labs(
+    x = "Scheduled hour",
+    y = "Percent of airline's departures",
+    title = "Schedule mix by hour for major airlines"
+  ) +
   theme_minimal()
 ```
 
@@ -216,20 +286,31 @@ airline_exposure <- departures %>%
 expected <- airline_exposure %>%
   left_join(base_rates, by = c("airport", "hour")) %>%
   group_by(airline) %>%
-  summarise(expected_on_time = sum(weight * base_on_time) * 100, .groups = "drop")
+  summarise(
+    expected_on_time = sum(weight * base_on_time) * 100,
+    .groups = "drop"
+  )
 
 observed <- departures %>%
   group_by(airline) %>%
   summarise(observed_on_time = mean(on_time) * 100, .groups = "drop")
 
-obs_exp <- observed %>% left_join(expected, by = "airline") %>%
+obs_exp <- observed %>%
+  left_join(expected, by = "airline") %>%
   left_join(departures_by_airline %>% select(airline, n), by = "airline")
 
-ggplot(obs_exp %>% filter(n >= 1000), aes(x = expected_on_time, y = observed_on_time, label = airline)) +
+ggplot(
+  obs_exp %>% filter(n >= 1000),
+  aes(x = expected_on_time, y = observed_on_time, label = airline)
+) +
   geom_point(aes(size = n), alpha = 0.7) +
   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
   geom_text_repel() +
-  labs(x = "Expected on-time % (given airport-hour mix)", y = "Observed on-time %", title = "Observed vs Expected On-time % by Airline") +
+  labs(
+    x = "Expected on-time % (given airport-hour mix)",
+    y = "Observed on-time %",
+    title = "Observed vs Expected On-time % by Airline"
+  ) +
   theme_minimal()
 
 # verifier: ensure obs_exp rows match number of airlines
