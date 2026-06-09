@@ -499,22 +499,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Overall, the raw on-time ranking shows which airlines had higher or lower observed punctuality, but it obscures the airport and time-of-day conditions each airline faced. Comparing observed and expected on-time percentages shows whether an airline’s performance is better or worse than what its schedule circumstances would predict.</p>
 <p><strong>Individual reflection: How does seeing the data rather than reading it in a table shaped their understanding over the course of this lab. Point to a specific moment: A plot that revealed something a column of numbers would have hidden, or a chart that overturned an impression an earlier step had left you with</strong></p>
 <ul>
-<li><strong>Zen: AI Laison</strong>
+<li><strong>Zen:</strong>
 <ul>
 <li>During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.</li>
 </ul></li>
-<li><strong>Jun Lum: Constructive Critic + Reporter</strong>
+<li><strong>Jun Lum:</strong>
 <ul>
 <li>The airport mix bar chart revealed to me that United airline late departures was due to a bad airport as seen in the on time departure by time and day and airport, Newark has the lowest on time departure and united airlines has 79% of departure from Newark. This make me realise how important visual graphs is at in helping to deduce hidden information.</li>
 </ul></li>
-<li><strong>Ben: Coder</strong>
+<li><strong>Benjamin:</strong>
 <ul>
-<li>…</li>
+<li>When I was doing the lab, the most shocking facter for me was the stacked bar chart. I never would have noticed that AirTran relies entirely on LaGuardia airport which made me realize that their punctuality ranking is solely based on how LaGuardia was running. It made my initial assumption of airlines spreading their flights evenly accross the city completely wrong as I did not expect an airline to only fly in a single airport.</li>
 </ul></li>
-<li><strong>Phoebe: Navigator + Verifier</strong>
+<li><strong>Phoebe:</strong>
 <ul>
 <li>I realized how much the visualizations helped me understand the data better than just looking at tables. The most useful plot for me was the heatmap of schedule mix by airline and hour because it showed me that the busiest airline, United, does not concentrate its departures in late, lower-punctuality hours, thus explaining why its raw ranking might not reflect its true punctuality performance. This made me realize that the time of day an airline flies can explain a lot about its punctuality rank, but it does not fully explain it.</li>
 </ul></li>
+</ul>
+</section>
+</section>
+<section id="team-reflection-and-contributions" class="level2">
+<h2 class="anchored" data-anchor-id="team-reflection-and-contributions">4 Team reflection and contributions</h2>
+<section id="reflection-on-ai-use" class="level3">
+<h3 class="anchored" data-anchor-id="reflection-on-ai-use">4.1 Reflection on AI Use</h3>
+<p>A highly effective suggestion was the AI’s method for ranking and visualizing categorical data for the Cleveland dot plot and lollipop chart. When asked how to reorder airline names, the AI correctly recommended the forcats package which is on the allowed list, using forcats::fct_reorder() combined with forcats::fct_rev(). This efficiently handled the data required for horizontal visualizations in ggplot2, ensuring the airlines were cleanly ranked by numeric value from top to bottom without the need for manual factor-level manipulation.</p>
+<p>Before the above, the team prompted “How do I reorder airline names by departure count so they appear ranked in a ggplot?” and the AI initially suggested using the base R reorder() function: ggplot(departures_by_airline, aes(x = n, y = reorder(airline, n))) + geom_point(). Although the initial suggestion works, it does not fit into the lab’s package policy, which explicitly includes the forcats package for handling categorical factors. The team recognized that relying on base R for factor manipulation is outdated and does not fit the lab’s package policy. Thus, the team corrected it with further prompting of the AI for a better suggestion to be used in the lab.</p>
+</section>
+<section id="each-members-role-and-contributions" class="level3">
+<h3 class="anchored" data-anchor-id="each-members-role-and-contributions">4.2 Each Member’s Role and Contributions</h3>
+<ul>
+<li>Zen: AI Laison</li>
+<li>Jun Lum: Constructive Critic + Reporter</li>
+<li>Benjamin: Coder</li>
+<li>Phoebe: Navigator + Verifier</li>
 </ul>
 </section>
 </section>
