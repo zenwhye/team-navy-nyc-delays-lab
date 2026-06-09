@@ -409,7 +409,7 @@ A plot that revealed something a column of numbers would have hidden, or a chart
 overturned an impression an earlier step had left you with**
 
 * **Zen: AI Laison**
-
+During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.
 * **Jun Lum: Constructive Critic + Reporter**
 
 * **Ben: Coder**
