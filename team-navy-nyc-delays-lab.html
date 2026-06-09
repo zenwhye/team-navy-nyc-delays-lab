@@ -306,6 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(sum_check<span class="sc">$</span>total <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">&lt;</span> <span class="fl">1e-6</span> <span class="sc">|</span> <span class="fu">abs</span>(sum_check<span class="sc">$</span>total <span class="sc">-</span> <span class="dv">100</span>) <span class="sc">&lt;</span> <span class="fl">0.1</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p><strong>Based on the stacked bar chart, which airport does the busiest airline depart from most, and how lopsided is that share? Call this airport the airline’s dominant airport; you will use the term again later.</strong></p>
 </section>
 <section id="on-time-departures-by-airport" class="level3">
 <h3 class="anchored" data-anchor-id="on-time-departures-by-airport">3.5 On-Time Departures by Airport</h3>
@@ -341,6 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
                77.80538                77.80538                77.94822 </code></pre>
 </div>
 </div>
+<p><strong>Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?</strong></p>
 <p>United’s dominant airport is Newark, and Newark has the lowest on-time percentage among the three airports. This suggests that United’s raw punctuality rank may partly reflect where it flies from, rather than only its schedule-adjusted punctuality.</p>
 </section>
 <section id="on-time-departures-by-time-of-day-and-airport-heatmap" class="level3">
@@ -377,6 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><strong>You mapped airport to color and linetype—two visual properties for one variable. Briefly justify this apparent redundancy: What does line type protect against that color alone does not?</strong></p>
 <p>Mapping airport to both color and linetype makes the lines easier to distinguish if the plot is printed in grayscale or viewed by someone who has difficulty distinguishing colors.</p>
 </section>
 <section id="schedule-mix-by-airline-hourly-profile" class="level3">
@@ -416,6 +419,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><strong>Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw punctuality rank?</strong></p>
 <p>The heatmap shows that airlines have different schedules across the day. United does not appear to operate only in the latest, lower-punctuality hours; its departures are spread across many hours. Therefore, time of day may explain part of its raw punctuality ranking, but it does not fully explain it.</p>
 </section>
 <section id="observed-versus-expected-on-time-departure-percentage" class="level3">
@@ -475,9 +479,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="summary-and-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="summary-and-interpretation">3.9 Summary and Interpretation</h3>
+<p><strong>Compare its dominant airport, expected on-time percentage, and position relative to the equality line with those of the busiest airline. Are the two airlines facing similar airport-hour circumstances? If so, what does their difference in observed on-time percentage suggest?</strong></p>
 <p>United is the busiest airline. Although its raw on-time percentage is not among the highest, its expected on-time percentage is also relatively low because it mainly operates from Newark and faces a less favorable airport-hour mix. Since United appears above the equality line, it performed better than expected given its airport-hour circumstances.</p>
 <p>ExpressJet is the airline at the bottom of the punctuality ranking. Like United, it mainly operates from Newark, so both airlines face somewhat similar airport circumstances. However, ExpressJet appears below the equality line, meaning its observed on-time percentage is worse than expected from its schedule mix.</p>
+<p><strong>Using this contrast, answer the lab’s question in two or three sentences: What does the raw on-time departure ranking reveal, and what does it obscure once airport-hour circumstances are considered?</strong></p>
 <p>Overall, the raw on-time ranking shows which airlines had higher or lower observed punctuality, but it obscures the airport and time-of-day conditions each airline faced. Comparing observed and expected on-time percentages shows whether an airline’s performance is better or worse than what its schedule circumstances would predict.</p>
+<p><strong>Individual reflection: How does seeing the data rather than reading it in a table shaped their understanding over the course of this lab. Point to a specific moment: A plot that revealed something a column of numbers would have hidden, or a chart that overturned an impression an earlier step had left you with</strong></p>
+<ul>
+<li><p><strong>Zen: AI Laison</strong></p></li>
+<li><p><strong>Jun Lum: Constructive Critic + Reporter</strong></p></li>
+<li><p><strong>Ben: Coder</strong></p></li>
+<li><p><strong>Phoebe: Navigator + Verifier</strong></p></li>
+</ul>
 </section>
 </section>
 

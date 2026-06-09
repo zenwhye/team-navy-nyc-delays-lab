@@ -216,6 +216,10 @@ stopifnot(all(
 ))
 ```
 
+**Based on the stacked bar chart, which airport does the busiest airline depart from most,
+and how lopsided is that share? Call this airport the airline’s dominant airport; you will
+use the term again later.**
+
 ### 3.5 On-Time Departures by Airport
 
 ```{r}
@@ -240,6 +244,8 @@ c(
   unweighted_airport_rate = unweighted_airport_rate
 )
 ```
+
+**Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?**
 
 United’s dominant airport is Newark, and Newark has the lowest on-time
 percentage among the three airports. This suggests that United’s raw
@@ -274,6 +280,10 @@ ggplot(
   ) +
   theme_minimal()
 ```
+
+**You mapped airport to color and linetype—two visual properties for one variable.
+Briefly justify this apparent redundancy: What does line type protect against that color
+alone does not?**
 
 Mapping airport to both color and linetype makes the lines easier to distinguish
 if the plot is printed in grayscale or viewed by someone who has difficulty
@@ -310,6 +320,9 @@ ggplot(hourly_mix, aes(x = hour, y = fct_rev(airline), fill = pct)) +
   ) +
   theme_minimal()
 ```
+
+**Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw
+punctuality rank?**
 
 The heatmap shows that airlines have different schedules across the day.
 United does not appear to operate only in the latest, lower-punctuality
@@ -368,6 +381,10 @@ ggplot(
   theme_minimal()
 ```
 
+### 3.9 Summary and Interpretation
+
+**Compare its dominant airport, expected on-time percentage, and position relative to the equality line with those of the busiest airline. Are the two airlines facing similar airport-hour circumstances? If so, what does their difference in observed on-time percentage suggest?**
+
 United is the busiest airline. Although its raw on-time percentage is not
 among the highest, its expected on-time percentage is also relatively low
 because it mainly operates from Newark and faces a less favorable
@@ -380,8 +397,23 @@ similar airport circumstances. However, ExpressJet appears below the equality
 line, meaning its observed on-time percentage is worse than expected from its
 schedule mix.
 
+**Using this contrast, answer the lab’s question in two or three sentences: What does the raw on-time departure ranking reveal, and what does it obscure once airport-hour circumstances are considered?**
+
 Overall, the raw on-time ranking shows which airlines had higher or lower
 observed punctuality, but it obscures the airport and time-of-day conditions
 each airline faced. Comparing observed and expected on-time percentages shows
 whether an airline’s performance is better or worse than what its schedule
 circumstances would predict.
+
+**Individual reflection: How does seeing the data rather than reading it in a
+table shaped their understanding over the course of this lab. Point to a specific moment:
+A plot that revealed something a column of numbers would have hidden, or a chart that
+overturned an impression an earlier step had left you with**
+
+* **Zen: AI Laison**
+
+* **Jun Lum: Constructive Critic + Reporter**
+
+* **Ben: Coder**
+
+* **Phoebe: Navigator + Verifier**
