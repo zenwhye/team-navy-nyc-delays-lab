@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="team-navy-nyc-delays-lab_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="team-navy-nyc-delays-lab_files/libs/quarto-html/anchor.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -303,6 +303,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+</div>
+<p><strong>Verifier Task: Confirm that the percentages you calculated for each airline sum to 100%, apart from rounding error.</strong></p>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifier: percentages per airline sum to ~100</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sum_check <span class="ot">&lt;-</span> mix <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(airline) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(pct))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(</span>
@@ -332,6 +335,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2 LaGuardia 101509        80.5
 3 Newark    117596        74.7</code></pre>
 </div>
+</div>
+<p><strong>Verifier Task: A rate for the whole is not the simple average of the rates for its parts—it is the average weighted by size. Confirm that your values are internally consistent: The departure-weighted mean of the three airport on-time percentages (each weighted by that airport’s n) must equal the overall on-time percentage across all rows of departures. Compute both and check that they match. Then take the plain, unweighted average of the three percentages and note how far off it is—and why averaging rates without weights is a mistake.</strong></p>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weighted_airport_rate <span class="ot">&lt;-</span> <span class="fu">weighted.mean</span>(by_airport<span class="sc">$</span>on_time_pct, by_airport<span class="sc">$</span>n)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>overall_rate <span class="ot">&lt;-</span> <span class="fu">mean</span>(departures<span class="sc">$</span>on_time) <span class="sc">*</span> <span class="dv">100</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>unweighted_airport_rate <span class="ot">&lt;-</span> <span class="fu">mean</span>(by_airport<span class="sc">$</span>on_time_pct)</span>
@@ -493,16 +499,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Overall, the raw on-time ranking shows which airlines had higher or lower observed punctuality, but it obscures the airport and time-of-day conditions each airline faced. Comparing observed and expected on-time percentages shows whether an airline’s performance is better or worse than what its schedule circumstances would predict.</p>
 <p><strong>Individual reflection: How does seeing the data rather than reading it in a table shaped their understanding over the course of this lab. Point to a specific moment: A plot that revealed something a column of numbers would have hidden, or a chart that overturned an impression an earlier step had left you with</strong></p>
 <ul>
-<li><p><strong>Zen: AI Laison</strong></p>
+<li><strong>Zen: AI Laison</strong>
 <ul>
 <li>During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.</li>
 </ul></li>
-<li><p><strong>Jun Lum: Constructive Critic + Reporter</strong></p>
+<li><strong>Jun Lum: Constructive Critic + Reporter</strong>
 <ul>
 <li>The airport mix bar chart revealed to me that United airline late departures was due to a bad airport as seen in the on time departure by time and day and airport, Newark has the lowest on time departure and united airlines has 79% of departure from Newark. This make me realise how important visual graphs is at in helping to deduce hidden information.</li>
 </ul></li>
-<li><p><strong>Ben: Coder</strong></p></li>
-<li><p><strong>Phoebe: Navigator + Verifier</strong></p>
+<li><strong>Ben: Coder</strong>
+<ul>
+<li>…</li>
+</ul></li>
+<li><strong>Phoebe: Navigator + Verifier</strong>
 <ul>
 <li>I realized how much the visualizations helped me understand the data better than just looking at tables. The most useful plot for me was the heatmap of schedule mix by airline and hour because it showed me that the busiest airline, United, does not concentrate its departures in late, lower-punctuality hours, thus explaining why its raw ranking might not reflect its true punctuality performance. This made me realize that the time of day an airline flies can explain a lot about its punctuality rank, but it does not fully explain it.</li>
 </ul></li>

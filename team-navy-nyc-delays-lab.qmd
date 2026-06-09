@@ -210,7 +210,10 @@ ggplot(mix, aes(x = pct, y = airline, fill = airport)) +
     title = "Airport mix by airline (normalized to 100%)"
   ) +
   theme_minimal()
+```
 
+**Verifier Task: Confirm that the percentages you calculated for each airline sum to 100%, apart from rounding error.**
+```{r}
 # Verifier: percentages per airline sum to ~100
 sum_check <- mix %>% group_by(airline) %>% summarise(total = sum(pct))
 stopifnot(all(
@@ -237,7 +240,10 @@ by_airport <- departures %>%
   )
 
 by_airport
+```
 
+**Verifier Task: A rate for the whole is not the simple average of the rates for its parts—it is the average weighted by size. Confirm that your values are internally consistent: The departure-weighted mean of the three airport on-time percentages (each weighted by that airport’s n) must equal the overall on-time percentage across all rows of departures. Compute both and check that they match. Then take the plain, unweighted average of the three percentages and note how far off it is—and why averaging rates without weights is a mistake.**
+```{r}
 weighted_airport_rate <- weighted.mean(by_airport$on_time_pct, by_airport$n)
 overall_rate <- mean(departures$on_time) * 100
 unweighted_airport_rate <- mean(by_airport$on_time_pct)
