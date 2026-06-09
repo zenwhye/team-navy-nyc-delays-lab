@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -196,8 +196,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>3.2.c What is the advantage of placing the airline names on the y-axis rather than the x-axis in this plot? Keep your answer brief. Placing airline names on the y‑axis makes the chart easier to read because text labels are listed vertically,so they don’t overlap</p>
-<p>3.2.e one advantage and one disadvantage of a lollipop chart compared with a bar chart. one advantage of using lollipop instead of bar chart is that it emphasizes the endpoints values to make it easier to compare the values. however, one disadvantage is that if there are many categories, the lines can overlap and make the chart cluttered and harder to read.</p>
+<p><strong>3.2.c What is the advantage of placing the airline names on the y-axis rather than the x-axis in this plot? Keep your answer brief.</strong></p>
+<p>Placing airline names on the y‑axis makes the chart easier to read because text labels are listed vertically,so they don’t overlap.</p>
+<p><strong>3.2.e one advantage and one disadvantage of a lollipop chart compared with a bar chart.</strong></p>
+<p>One advantage of using lollipop instead of bar chart is that it emphasizes the endpoints values to make it easier to compare the values. However, one disadvantage is that if there are many categories, the lines can overlap and make the chart cluttered and harder to read.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifier: sum of counts equals number of rows in departures</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">sum</span>(departures_by_airline<span class="sc">$</span>n) <span class="sc">==</span> <span class="fu">nrow</span>(departures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -235,7 +237,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>3.3.d Why is it acceptable for the x-axis of a Cleveland dot plot not to start at zero, whereas the x-axis of a bar chart or lollipop chart always should? it is acceptable for the x-axis to not start at zero for the cleveland dot plot because it is used to compare the difference between the values instead of the actual values. however for lollipop chart, you should always start the x-axis at 0 so as to compare the actual values. 3.3.e Find the busiest airline from the previous task—the top lollipop of the previous plot—in this punctuality ranking. Record where it appears in the ranking. The tasks that follow ask whether its raw on-time percentage should be interpreted on its own, or whether it partly reflects where and when the airline flies. Note, too, the airline at the very bottom of the ranking; you will return to it for comparison at the end. The top departure from the lollipop chart is united airlines. In this punctuality ranking, united airlines is ranked 6th</p>
+<p><strong>3.3.d Why is it acceptable for the x-axis of a Cleveland dot plot not to start at zero, whereas the x-axis of a bar chart or lollipop chart always should?</strong></p>
+<p>It is acceptable for the x-axis to not start at zero for the cleveland dot plot because it is used to compare the difference between the values instead of the actual values. however for lollipop chart, you should always start the x-axis at 0 so as to compare the actual values.</p>
+<p><strong>3.3.e Find the busiest airline from the previous task—the top lollipop of the previous plot—in this punctuality ranking. Record where it appears in the ranking. The tasks that follow ask whether its raw on-time percentage should be interpreted on its own, or whether it partly reflects where and when the airline flies. Note, too, the airline at the very bottom of the ranking; you will return to it for comparison at the end.</strong></p>
+<p>The top departure from the lollipop chart is united airlines. In this punctuality ranking, united airlines is ranked 6th</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifier: check busiest airline's on-time pct matches calculation from departures</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>busiest_airline <span class="ot">&lt;-</span> departures_by_airline <span class="sc">%&gt;%</span></span>
