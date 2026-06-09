@@ -72,6 +72,7 @@ stopifnot(!any(is.na(departures)))
 
 ### 3.2 Airlines Ranked by Departures (Lollipop)
 
+**3.2a, 3.2b, 3.2d**
 ```{r}
 #| label: departures-by-airline
 departures_by_airline <- departures %>%
@@ -103,8 +104,7 @@ ggplot(departures_by_airline, aes(x = n, y = fct_reorder(airline, n))) +
   scale_x_continuous(expand = expansion(mult = c(0, 0.1)))
 ```
 
-**3.2.c What is the advantage of placing the airline names on the y-axis rather than the x-axis in
-this plot? Keep your answer brief.**
+**3.2.c What is the advantage of placing the airline names on the y-axis rather than the x-axis in this plot? Keep your answer brief.**
 
 Placing airline names on the y‑axis makes the chart easier to read because text labels are listed vertically,so they don’t overlap.
 
@@ -112,6 +112,7 @@ Placing airline names on the y‑axis makes the chart easier to read because tex
 
 One advantage of using lollipop instead of bar chart is that it emphasizes the endpoints values to make it easier to compare the values. However, one disadvantage is that if there are many categories, the lines can overlap and make the chart cluttered and harder to read.
 
+**Verifier Task: Confirm that the sum of the counts in departures_by_airline equals the number of rows in departures.**
 ```{r}
 # Verifier: sum of counts equals number of rows in departures
 stopifnot(sum(departures_by_airline$n) == nrow(departures))
@@ -155,6 +156,7 @@ ask whether its raw on-time percentage should be interpreted on its own, or whet
 
 The top departure from the lollipop chart is united airlines. In this punctuality ranking, united airlines is ranked 6th
 
+**Verifier Task: Confirm that the on-time percentage you calculated for the busiest airline matches the value you can calculate directly from the departures tibble.**
 ```{r}
 # Verifier: check busiest airline's on-time pct matches calculation from departures
 busiest_airline <- departures_by_airline %>%

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="team-navy-nyc-delays-lab_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="team-navy-nyc-delays-lab_files/libs/quarto-html/anchor.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -160,6 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="airlines-ranked-by-departures-lollipop" class="level3">
 <h3 class="anchored" data-anchor-id="airlines-ranked-by-departures-lollipop">3.2 Airlines Ranked by Departures (Lollipop)</h3>
+<p><strong>3.2a, 3.2b, 3.2d</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>departures_by_airline <span class="ot">&lt;-</span> departures <span class="sc">%&gt;%</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(airline) <span class="sc">%&gt;%</span></span>
@@ -200,6 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Placing airline names on the y‑axis makes the chart easier to read because text labels are listed vertically,so they don’t overlap.</p>
 <p><strong>3.2.e one advantage and one disadvantage of a lollipop chart compared with a bar chart.</strong></p>
 <p>One advantage of using lollipop instead of bar chart is that it emphasizes the endpoints values to make it easier to compare the values. However, one disadvantage is that if there are many categories, the lines can overlap and make the chart cluttered and harder to read.</p>
+<p><strong>Verifier Task: Confirm that the sum of the counts in departures_by_airline equals the number of rows in departures.</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifier: sum of counts equals number of rows in departures</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">sum</span>(departures_by_airline<span class="sc">$</span>n) <span class="sc">==</span> <span class="fu">nrow</span>(departures))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -280,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mix, <span class="fu">aes</span>(<span class="at">x =</span> pct, <span class="at">y =</span> <span class="fu">fct_rev</span>(airline), <span class="at">fill =</span> airport)) <span class="sc">+</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mix, <span class="fu">aes</span>(<span class="at">x =</span> pct, <span class="at">y =</span> airline, <span class="at">fill =</span> airport)) <span class="sc">+</span></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>) <span class="sc">+</span></span>
 <span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
 <span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">ifelse</span>(pct <span class="sc">&gt;=</span> <span class="dv">5</span>, <span class="fu">sprintf</span>(<span class="st">"%.0f%%"</span>, pct), <span class="st">""</span>)),</span>
@@ -307,6 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Based on the stacked bar chart, which airport does the busiest airline depart from most, and how lopsided is that share? Call this airport the airline’s dominant airport; you will use the term again later.</strong></p>
+<p>The airport that the busiest airline (united airlines) departs from most is Newark. 80% of united airline departures are from Newark.</p>
 </section>
 <section id="on-time-departures-by-airport" class="level3">
 <h3 class="anchored" data-anchor-id="on-time-departures-by-airport">3.5 On-Time Departures by Airport</h3>
@@ -343,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?</strong></p>
-<p>United’s dominant airport is Newark, and Newark has the lowest on-time percentage among the three airports. This suggests that United’s raw punctuality rank may partly reflect where it flies from, rather than only its schedule-adjusted punctuality.</p>
+<p>The dominant departure airport of United Airlines is Newark and it has the lowest on-time percentage. This suggests that United airlines raw rank may partly reflect where it flies rather than its schedule-adjusted punctuality.</p>
 </section>
 <section id="on-time-departures-by-time-of-day-and-airport-heatmap" class="level3">
 <h3 class="anchored" data-anchor-id="on-time-departures-by-time-of-day-and-airport-heatmap">3.6 On-Time Departures by Time of Day and Airport (Heatmap)</h3>
@@ -380,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>You mapped airport to color and linetype—two visual properties for one variable. Briefly justify this apparent redundancy: What does line type protect against that color alone does not?</strong></p>
-<p>Mapping airport to both color and linetype makes the lines easier to distinguish if the plot is printed in grayscale or viewed by someone who has difficulty distinguishing colors.</p>
+<p>Mapping airport to both color and linetype makes the lines easier to distinguish if the plot is printed in grayscale or viewed by someone who is color blind or deficient.</p>
 </section>
 <section id="schedule-mix-by-airline-hourly-profile" class="level3">
 <h3 class="anchored" data-anchor-id="schedule-mix-by-airline-hourly-profile">3.7 Schedule Mix by Airline (Hourly profile)</h3>
@@ -420,7 +423,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw punctuality rank?</strong></p>
-<p>The heatmap shows that airlines have different schedules across the day. United does not appear to operate only in the latest, lower-punctuality hours; its departures are spread across many hours. Therefore, time of day may explain part of its raw punctuality ranking, but it does not fully explain it.</p>
+<p>United airlines does not concentrate its depatures in late, Lower-punctuality hours. It also flies at more favorable times. Based on the heatmap, the time it flies explains a lot about its raw punctuality rank, but it does not fully explain it.</p>
 </section>
 <section id="observed-versus-expected-on-time-departure-percentage" class="level3">
 <h3 class="anchored" data-anchor-id="observed-versus-expected-on-time-departure-percentage">3.8 Observed versus Expected On-Time Departure Percentage</h3>
