@@ -253,7 +253,7 @@ c(
 
 The dominant departure airport of United Airlines is Newark and it has the lowest on-time percentage. This suggests that United airlines raw rank may partly reflect where it flies rather than its schedule-adjusted punctuality.
 
-### 3.6 On-Time Departures by Time of Day and Airport (Heatmap)
+### 3.6 On-Time Departures by Time of Day and Airport
 
 ```{r}
 #| label: on-time-by-hour-airport
@@ -290,7 +290,7 @@ Mapping airport to both color and linetype makes the lines easier to distinguish
 if the plot is printed in grayscale or viewed by someone who is color blind or deficient.
 
 
-### 3.7 Schedule Mix by Airline (Hourly profile)
+### 3.7 Schedule Mix by Airline
 
 ```{r}
 #| label: schedule-mix
@@ -310,7 +310,7 @@ hourly_mix <- departures %>%
     )
   )
 
-ggplot(hourly_mix, aes(x = hour, y = fct_rev(airline), fill = pct)) +
+ggplot(hourly_mix, aes(x = hour, y = airline, fill = pct)) +
   geom_tile() +
   labs(
     x = "Scheduled departure hour",

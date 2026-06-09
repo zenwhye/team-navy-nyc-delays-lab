@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="team-navy-nyc-delays-lab_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="team-navy-nyc-delays-lab_files/libs/bootstrap/bootstrap-138a6193a3bd40baf1e627da441a4734.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -348,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?</strong></p>
 <p>The dominant departure airport of United Airlines is Newark and it has the lowest on-time percentage. This suggests that United airlines raw rank may partly reflect where it flies rather than its schedule-adjusted punctuality.</p>
 </section>
-<section id="on-time-departures-by-time-of-day-and-airport-heatmap" class="level3">
-<h3 class="anchored" data-anchor-id="on-time-departures-by-time-of-day-and-airport-heatmap">3.6 On-Time Departures by Time of Day and Airport (Heatmap)</h3>
+<section id="on-time-departures-by-time-of-day-and-airport" class="level3">
+<h3 class="anchored" data-anchor-id="on-time-departures-by-time-of-day-and-airport">3.6 On-Time Departures by Time of Day and Airport</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>hour_airport <span class="ot">&lt;-</span> departures <span class="sc">%&gt;%</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(airport, hour) <span class="sc">%&gt;%</span></span>
@@ -385,8 +385,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>You mapped airport to color and linetype—two visual properties for one variable. Briefly justify this apparent redundancy: What does line type protect against that color alone does not?</strong></p>
 <p>Mapping airport to both color and linetype makes the lines easier to distinguish if the plot is printed in grayscale or viewed by someone who is color blind or deficient.</p>
 </section>
-<section id="schedule-mix-by-airline-hourly-profile" class="level3">
-<h3 class="anchored" data-anchor-id="schedule-mix-by-airline-hourly-profile">3.7 Schedule Mix by Airline (Hourly profile)</h3>
+<section id="schedule-mix-by-airline" class="level3">
+<h3 class="anchored" data-anchor-id="schedule-mix-by-airline">3.7 Schedule Mix by Airline</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>hourly_mix <span class="ot">&lt;-</span> departures <span class="sc">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(airline <span class="sc">%in%</span> departures_by_airline_big<span class="sc">$</span>airline) <span class="sc">%&gt;%</span></span>
