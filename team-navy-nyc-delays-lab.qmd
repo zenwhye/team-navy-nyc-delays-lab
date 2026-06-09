@@ -220,6 +220,8 @@ stopifnot(all(
 and how lopsided is that share? Call this airport the airline’s dominant airport; you will
 use the term again later.**
 
+The airport that the busiest airline (united airlines) departs from most is Newark. 80% of united airline departures are from Newark.
+
 ### 3.5 On-Time Departures by Airport
 
 ```{r}
@@ -247,10 +249,7 @@ c(
 
 **Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?**
 
-United’s dominant airport is Newark, and Newark has the lowest on-time
-percentage among the three airports. This suggests that United’s raw
-punctuality rank may partly reflect where it flies from, rather than only its
-schedule-adjusted punctuality.
+The dominant departure airport of United Airlines is Newark and it has the lowest on-time percentage. This suggests that United airlines raw rank may partly reflect where it flies rather than its schedule-adjusted punctuality.
 
 ### 3.6 On-Time Departures by Time of Day and Airport (Heatmap)
 
@@ -286,8 +285,8 @@ Briefly justify this apparent redundancy: What does line type protect against th
 alone does not?**
 
 Mapping airport to both color and linetype makes the lines easier to distinguish
-if the plot is printed in grayscale or viewed by someone who has difficulty
-distinguishing colors.
+if the plot is printed in grayscale or viewed by someone who is color blind or deficient.
+
 
 ### 3.7 Schedule Mix by Airline (Hourly profile)
 
@@ -324,10 +323,7 @@ ggplot(hourly_mix, aes(x = hour, y = fct_rev(airline), fill = pct)) +
 **Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw
 punctuality rank?**
 
-The heatmap shows that airlines have different schedules across the day.
-United does not appear to operate only in the latest, lower-punctuality
-hours; its departures are spread across many hours. Therefore, time of day may
-explain part of its raw punctuality ranking, but it does not fully explain it.
+United airlines does not concentrate its depatures in late, Lower-punctuality hours. It also flies at more favorable times. Based on the heatmap, the time it flies explains a lot about its raw punctuality rank, but it does not fully explain it.
 
 ### 3.8 Observed versus Expected On-Time Departure Percentage
 
