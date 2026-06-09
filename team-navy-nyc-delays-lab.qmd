@@ -190,7 +190,7 @@ mix <- mix %>%
     )
   )
 
-ggplot(mix, aes(x = pct, y = fct_rev(airline), fill = airport)) +
+ggplot(mix, aes(x = pct, y = airline, fill = airport)) +
   geom_col(position = "stack") +
   geom_text(
     aes(label = ifelse(pct >= 5, sprintf("%.0f%%", pct), "")),
