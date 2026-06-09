@@ -308,7 +308,7 @@ hourly_mix <- departures %>%
     )
   )
 
-ggplot(hourly_mix, aes(x = hour, y = fct_rev(airline), fill = pct)) +
+ggplot(hourly_mix, aes(x = hour, y = airline, fill = pct)) +
   geom_tile() +
   labs(
     x = "Scheduled departure hour",
