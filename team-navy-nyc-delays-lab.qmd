@@ -3,6 +3,37 @@ title: "team-navy-nyc-delays-lab"
 format: html
 ---
 
+## 1 Overview
+
+This Quarto document implements the Week 06 lab tasks on visualizing on-time
+departures from New York City-area airports. Follow the code chunks below to
+reproduce the figures and answers from the lab brief.
+
+## 2 Lab Rules
+
+Permitted Packages in this lab:
+
+* ggrepel
+* nycflights13
+* dplyr
+* forcats
+* ggplot2
+* lubridate
+* purrr
+* readr
+* stringr
+* tibble
+* tidyr
+
+## 3 Tasks
+
+Placeholders for lab tasks (3.1–3.9). Implement plots in subsequent code
+chunks following the lab instructions.
+
+<!-- data is prepared in the setup chunk and available as `departures` -->
+
+### 3.1 Data preparation
+
 ```{r}
 #| label: setup
 #| message: false
@@ -41,26 +72,7 @@ departures <- flights %>%
 readr::write_rds(departures, file = "data/departures.rds")
 ```
 
-## 1 Overview
-
-This Quarto document implements the Week 06 lab tasks on visualizing on-time
-departures from New York City-area airports. Follow the code chunks below to
-reproduce the figures and answers from the lab brief.
-
-## 2 Data preparation
-
-The data-preparation code is in `scripts/prepare_departures.R` and saves a
-prepared `data/departures.rds` file.
-
-## 3 Tasks
-
-Placeholders for lab tasks (3.1–3.9). Implement plots in subsequent code
-chunks following the lab instructions.
-
-<!-- data is prepared in the setup chunk and available as `departures` -->
-
-### 3.1 Data preparation checks
-
+**Verifier Task: A join can silently add rows if the lookup table contains duplicate codes, or it can leave unmatched values as NA. Confirm that departures has the same number of rows before and after the join, and that the final tibble contains no missing values.**
 ```{r}
 #| label: prep-checks
 # Verifier: ensure columns exist and no missing values
@@ -295,6 +307,9 @@ alone does not?**
 Mapping airport to both color and linetype makes the lines easier to distinguish
 if the plot is printed in grayscale or viewed by someone who is color blind or deficient.
 
+**Verifier Task: The plot may indicate that the on-time departure percentage declines over the course of the day. Find evidence from a credible source that this is a known phenomenon in the airline industry, quote a short relevant passage, and cite the source in your answer. Your quotation must support the claim directly, not merely mention flight delays in general.**
+
+TO BE FILLED
 
 ### 3.7 Schedule Mix by Airline
 

@@ -101,6 +101,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1 Overview</h2>
+<p>This Quarto document implements the Week 06 lab tasks on visualizing on-time departures from New York City-area airports. Follow the code chunks below to reproduce the figures and answers from the lab brief.</p>
+</section>
+<section id="lab-rules" class="level2">
+<h2 class="anchored" data-anchor-id="lab-rules">2 Lab Rules</h2>
+<p>Permitted Packages in this lab:</p>
+<ul>
+<li>ggrepel</li>
+<li>nycflights13</li>
+<li>dplyr</li>
+<li>forcats</li>
+<li>ggplot2</li>
+<li>lubridate</li>
+<li>purrr</li>
+<li>readr</li>
+<li>stringr</li>
+<li>tibble</li>
+<li>tidyr</li>
+</ul>
+</section>
+<section id="tasks" class="level2">
+<h2 class="anchored" data-anchor-id="tasks">3 Tasks</h2>
+<p>Placeholders for lab tasks (3.1–3.9). Implement plots in subsequent code chunks following the lab instructions.</p>
+<!-- data is prepared in the setup chunk and available as `departures` -->
+<section id="data-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="data-preparation">3.1 Data preparation</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
@@ -136,20 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co"># save prepared data for reproducibility (optional)</span></span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_rds</span>(departures, <span class="at">file =</span> <span class="st">"data/departures.rds"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">1 Overview</h2>
-<p>This Quarto document implements the Week 06 lab tasks on visualizing on-time departures from New York City-area airports. Follow the code chunks below to reproduce the figures and answers from the lab brief.</p>
-</section>
-<section id="data-preparation" class="level2">
-<h2 class="anchored" data-anchor-id="data-preparation">2 Data preparation</h2>
-<p>The data-preparation code is in <code>scripts/prepare_departures.R</code> and saves a prepared <code>data/departures.rds</code> file.</p>
-</section>
-<section id="tasks" class="level2">
-<h2 class="anchored" data-anchor-id="tasks">3 Tasks</h2>
-<p>Placeholders for lab tasks (3.1–3.9). Implement plots in subsequent code chunks following the lab instructions.</p>
-<!-- data is prepared in the setup chunk and available as `departures` -->
-<section id="data-preparation-checks" class="level3">
-<h3 class="anchored" data-anchor-id="data-preparation-checks">3.1 Data preparation checks</h3>
+<p><strong>Verifier Task: A join can silently add rows if the lookup table contains duplicate codes, or it can leave unmatched values as NA. Confirm that departures has the same number of rows before and after the join, and that the final tibble contains no missing values.</strong></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verifier: ensure columns exist and no missing values</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(</span>
@@ -391,6 +405,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><strong>3.6.c You mapped airport to color and linetype—two visual properties for one variable. Briefly justify this apparent redundancy: What does line type protect against that color alone does not?</strong></p>
 <p>Mapping airport to both color and linetype makes the lines easier to distinguish if the plot is printed in grayscale or viewed by someone who is color blind or deficient.</p>
+<p><strong>Verifier Task: The plot may indicate that the on-time departure percentage declines over the course of the day. Find evidence from a credible source that this is a known phenomenon in the airline industry, quote a short relevant passage, and cite the source in your answer. Your quotation must support the claim directly, not merely mention flight delays in general.</strong></p>
+<p>TO BE FILLED</p>
 </section>
 <section id="schedule-mix-by-airline" class="level3">
 <h3 class="anchored" data-anchor-id="schedule-mix-by-airline">3.7 Schedule Mix by Airline</h3>
