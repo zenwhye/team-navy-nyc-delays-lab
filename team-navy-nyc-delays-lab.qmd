@@ -218,7 +218,7 @@ stopifnot(all(
 ))
 ```
 
-**Based on the stacked bar chart, which airport does the busiest airline depart from most,
+**3.4.d Based on the stacked bar chart, which airport does the busiest airline depart from most,
 and how lopsided is that share? Call this airport the airline’s dominant airport; you will
 use the term again later.**
 
@@ -249,7 +249,7 @@ c(
 )
 ```
 
-**Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?**
+**3.5.b Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?**
 
 The dominant departure airport of United Airlines is Newark and it has the lowest on-time percentage. This suggests that United airlines raw rank may partly reflect where it flies rather than its schedule-adjusted punctuality.
 
@@ -282,7 +282,7 @@ ggplot(
   theme_minimal()
 ```
 
-**You mapped airport to color and linetype—two visual properties for one variable.
+**3.6.c You mapped airport to color and linetype—two visual properties for one variable.
 Briefly justify this apparent redundancy: What does line type protect against that color
 alone does not?**
 
@@ -322,7 +322,7 @@ ggplot(hourly_mix, aes(x = hour, y = airline, fill = pct)) +
   theme_minimal()
 ```
 
-**Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw
+**3.7.c Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw
 punctuality rank?**
 
 United airlines does not concentrate its depatures in late, Lower-punctuality hours. It also flies at more favorable times. Based on the heatmap, the time it flies explains a lot about its raw punctuality rank, but it does not fully explain it.
@@ -409,9 +409,10 @@ A plot that revealed something a column of numbers would have hidden, or a chart
 overturned an impression an earlier step had left you with**
 
 * **Zen: AI Laison**
-During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.
+    * During this lab i found that the visualisaions helped me understand the airline data much better than looking at tables alone.The most useful plot for me was the observed-versus-expected punctuality chart because it showed that an airline’s ranking can be affected by the airports and times at which it operates. Before seeing that chart, I assumed the raw ranking reflected only airline performance.
 * **Jun Lum: Constructive Critic + Reporter**
-The airport mix bar chart revealed to me that United airline late departures was due to a bad airport as seen in the on time departure by time and day and airport, Newark has the lowest on time departure and united airlines has 79% of departure from Newark. This make me realise how important visual graphs is at in helping to deduce hidden information.
+    * The airport mix bar chart revealed to me that United airline late departures was due to a bad airport as seen in the on time departure by time and day and airport, Newark has the lowest on time departure and united airlines has 79% of departure from Newark. This make me realise how important visual graphs is at in helping to deduce hidden information.
 * **Ben: Coder**
-
+    * ...
 * **Phoebe: Navigator + Verifier**
+    * I realized how much the visualizations helped me understand the data better than just looking at tables. The most useful plot for me was the heatmap of schedule mix by airline and hour because it showed me that the busiest airline, United, does not concentrate its departures in late, lower-punctuality hours, thus explaining why its raw ranking might not reflect its true punctuality performance. This made me realize that the time of day an airline flies can explain a lot about its punctuality rank, but it does not fully explain it.
