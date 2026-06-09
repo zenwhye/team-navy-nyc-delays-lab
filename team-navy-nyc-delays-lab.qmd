@@ -103,6 +103,13 @@ ggplot(departures_by_airline, aes(x = n, y = fct_reorder(airline, n))) +
   scale_x_continuous(expand = expansion(mult = c(0, 0.1)))
 ```
 
+3.2.c What is the advantage of placing the airline names on the y-axis rather than the x-axis in
+this plot? Keep your answer brief.
+Placing airline names on the y‑axis makes the chart easier to read because text labels are listed vertically,so they don’t overlap
+
+3.2.e one advantage and one disadvantage of a lollipop chart compared with a bar chart.
+one advantage of using lollipop instead of bar chart is that it emphasizes the endpoints values to make it easier to compare the values. however, one disadvantage is that if there are many categories, the lines can overlap and make the chart cluttered and harder to read.
+
 ```{r}
 # Verifier: sum of counts equals number of rows in departures
 stopifnot(sum(departures_by_airline$n) == nrow(departures))
@@ -119,7 +126,7 @@ departures_by_airline_big <- departures_by_airline_big %>%
   arrange(on_time_pct) %>%
   mutate(airline = factor(airline, levels = airline))
 
-ggplot(departures_by_airline_big, aes(x = on_time_pct, y = fct_rev(airline))) +
+ggplot(departures_by_airline_big, aes(x = on_time_pct, y = airline)) +
   geom_point(size = 3, color = "darkgreen") +
   geom_text(
     aes(label = sprintf("%.1f%%", on_time_pct)),
@@ -134,6 +141,14 @@ ggplot(departures_by_airline_big, aes(x = on_time_pct, y = fct_rev(airline))) +
   theme_minimal() +
   scale_x_continuous(expand = expansion(mult = c(0, 0.05)))
 ```
+
+3.3.d Why is it acceptable for the x-axis of a Cleveland dot plot not to start at zero, whereas the
+x-axis of a bar chart or lollipop chart always should?
+it is acceptable for the x-axis to not start at zero for the cleveland dot plot because it is used to compare the difference between the values instead of the actual values. however for lollipop chart, you should always start the x-axis at 0 so as to compare the actual values. 
+3.3.e Find the busiest airline from the previous task—the top lollipop of the previous plot—in
+this punctuality ranking. Record where it appears in the ranking. The tasks that follow
+ask whether its raw on-time percentage should be interpreted on its own, or whether it partly reflects where and when the airline flies. Note, too, the airline at the very bottom of the ranking; you will return to it for comparison at the end.
+The top departure from the lollipop chart is united airlines. In this punctuality ranking, united airlines is ranked 6th
 
 ```{r}
 # Verifier: check busiest airline's on-time pct matches calculation from departures
