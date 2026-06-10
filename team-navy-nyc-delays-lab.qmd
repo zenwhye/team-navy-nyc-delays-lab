@@ -37,7 +37,11 @@ chunks following the lab instructions.
 ```{r}
 #| label: setup
 #| message: false
-library(tidyverse)
+library(dplyr)
+library(forcats)
+library(ggplot2)
+library(readr)
+library(tidyr)
 library(nycflights13)
 library(ggrepel)
 ## Inline data preparation (reads carriers.csv and prepares `departures`)
@@ -51,7 +55,7 @@ if (!dir.exists("data")) {
 carriers <- readr::read_csv("carriers.csv", show_col_types = FALSE)
 
 # prepare departures tibble per lab instructions
-departures <- flights %>%
+departures_pre_join <- flights %>%
   filter(!is.na(dep_delay)) %>%
   transmute(
     airline_code = carrier,
@@ -64,9 +68,13 @@ departures <- flights %>%
     ),
     hour = hour,
     on_time = dep_delay < 15
-  ) %>%
+  )
+
+departures_joined <- departures_pre_join %>%
   left_join(carriers, by = c("airline_code" = "airline_code")) %>%
   select(airline = airline, airport, hour, on_time)
+
+departures <- departures_joined
 
 # save prepared data for reproducibility (optional)
 readr::write_rds(departures, file = "data/departures.rds")
@@ -75,7 +83,16 @@ readr::write_rds(departures, file = "data/departures.rds")
 **Verifier Task: A join can silently add rows if the lookup table contains duplicate codes, or it can leave unmatched values as NA. Confirm that departures has the same number of rows before and after the join, and that the final tibble contains no missing values.**
 ```{r}
 #| label: prep-checks
-# Verifier: ensure columns exist and no missing values
+# Verifier: ensure the join did not add rows and no missing values were created
+pre_join_rows <- nrow(departures_pre_join)
+post_join_rows <- nrow(departures_joined)
+
+c(
+  pre_join_rows = pre_join_rows,
+  post_join_rows = post_join_rows
+)
+
+stopifnot(pre_join_rows == post_join_rows)
 stopifnot(all(
   c("airline", "airport", "hour", "on_time") %in% names(departures)
 ))
@@ -263,9 +280,14 @@ unweighted_airport_rate <- mean(by_airport$on_time_pct)
 c(
   weighted_airport_rate = weighted_airport_rate,
   overall_rate = overall_rate,
-  unweighted_airport_rate = unweighted_airport_rate
+  unweighted_airport_rate = unweighted_airport_rate,
+  unweighted_error = unweighted_airport_rate - overall_rate
 )
+
+stopifnot(abs(weighted_airport_rate - overall_rate) < 1e-8)
 ```
+
+The weighted airport rate matches the overall rate: both are 77.80538%. The unweighted average is 77.94822%, which is 0.14284 percentage points higher than the overall rate. The unweighted average is off because it gives JFK, LaGuardia, and Newark equal weight even though they have different numbers of departures; airport rates should be weighted by departure count.
 
 **3.5.b Is the dominant departure airport of the busiest airline also the airport with the lowest on-time percentage? If so, what does that suggest? Could the airline’s raw rank partly reflect where it flies rather than its schedule-adjusted punctuality?**
 
@@ -309,7 +331,13 @@ if the plot is printed in grayscale or viewed by someone who is color blind or d
 
 **Verifier Task: The plot may indicate that the on-time departure percentage declines over the course of the day. Find evidence from a credible source that this is a known phenomenon in the airline industry, quote a short relevant passage, and cite the source in your answer. Your quotation must support the claim directly, not merely mention flight delays in general.**
 
-TO BE FILLED
+This pattern is consistent with airline-industry reporting. The Washington Post, citing U.S. Transportation Department data, reported that flights in the "6 a.m. hour" left on time "more than 94 percent" of the time, while by the "6 p.m. hour, 79 percent" were leaving on time (Sampson, 2025). This directly supports the plot's suggestion that on-time departure percentages tend to be higher early in the day and lower later in the day.[^1]
+
+One reason this happens is that delays can build up as the day progresses. Early flights often use aircraft that were already parked at the airport overnight, so they are less affected by late-arriving inbound planes. Later flights are more exposed to earlier disruptions, because a delayed aircraft, crew, or airport operation can affect the next flights in the schedule. Therefore, if the line plot shows lower on-time percentages in the afternoon or evening, that pattern is plausible and not just random noise in this dataset.
+
+[^1]: Sampson, H. (2025, February 25). *The agony and ecstasy of the 6 a.m. flight*. The Washington Post. https://www.washingtonpost.com/travel/2025/02/25/early-flight-first-delays-airlines/
+
+
 
 ### 3.7 Schedule Mix by Airline
 
@@ -346,7 +374,7 @@ ggplot(hourly_mix, aes(x = hour, y = airline, fill = pct)) +
 **3.7.c Interpret the heatmap. Locate the busiest airline you have been tracking since Section 3.3. Does it concentrate its departures in late, lower-punctuality hours, or does it fly at more favorable times? Based on the heatmap, how much can when it flies explain its raw
 punctuality rank?**
 
-United airlines does not concentrate its depatures in late, Lower-punctuality hours. It also flies at more favorable times. Based on the heatmap, the time it flies explains a lot about its raw punctuality rank, but it does not fully explain it.
+United Airlines does not appear heavily concentrated in late, lower-punctuality hours. It also has many departures during more favorable times of day. Based on the heatmap, schedule time alone explains only a limited part of United's raw punctuality rank; its airport mix, especially its heavy use of Newark, seems more important.
 
 ### 3.8 Observed versus Expected On-Time Departure Percentage
 
@@ -380,14 +408,13 @@ ggplot(
   aes(
     x = expected_on_time_pct,
     y = on_time_pct,
-    size = n,
     color = dominant_airport,
     label = airline
   )
 ) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
-  geom_point(alpha = 0.7) +
-  geom_text_repel() +
+  geom_point(aes(size = n), alpha = 0.7) +
+  geom_text_repel(size = 3, show.legend = FALSE) +
   scale_size_area(max_size = 12) +
   labs(
     x = "Expected on-time departures (%)",
@@ -436,7 +463,7 @@ overturned an impression an earlier step had left you with**
 * **Benjamin:**
     * When I was doing the lab, the most shocking facter for me was the stacked bar chart. I never would have noticed that AirTran relies entirely on LaGuardia airport which made me realize that their punctuality ranking is solely based on how LaGuardia was running. It made my initial assumption of airlines spreading their flights evenly accross the city completely wrong as I did not expect an airline to only fly in a single airport.
 * **Phoebe:**
-    * I realized how much the visualizations helped me understand the data better than just looking at tables. The most useful plot for me was the heatmap of schedule mix by airline and hour because it showed me that the busiest airline, United, does not concentrate its departures in late, lower-punctuality hours, thus explaining why its raw ranking might not reflect its true punctuality performance. This made me realize that the time of day an airline flies can explain a lot about its punctuality rank, but it does not fully explain it.
+    * I realized how much the visualizations helped me understand the data better than just looking at tables. The most useful plot for me was the heatmap of schedule mix by airline and hour because it showed me that the busiest airline, United, does not concentrate its departures in late, lower-punctuality hours. This made me realize that time of day alone explains only a limited part of United's punctuality rank, so its airport mix and other operating circumstances also need to be considered.
 
 ## 4 Team reflection and contributions
 
@@ -452,3 +479,4 @@ Before the above, the team prompted "How do I reorder airline names by departure
 * Jun Lum: Constructive Critic + Reporter
 * Benjamin: Coder
 * Phoebe: Navigator + Verifier
+
